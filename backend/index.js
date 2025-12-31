@@ -1,8 +1,8 @@
 import express from "express"
 import cors from "cors"
 import dotenv from "dotenv"
+import cookieParser from "cookie-parser"
 import UserRoutes from "./routes/user.route.js"
-import { db } from "./config/db.js";
 dotenv.config();
 
 // express instance
@@ -16,6 +16,7 @@ app.use(cors({
     origin:"*",
     credentials: true,
 }))
+app.use(cookieParser())
 
 // api routes
 app.use('/api/v1', UserRoutes)

@@ -1,10 +1,13 @@
 import express from "express"
 import cors from "cors"
 import dotenv from "dotenv"
+import UserRoutes from "./routes/user.route.js"
+import { db } from "./config/db.js";
 dotenv.config();
 
 // express instance
 const app = express();
+
 
 // middlewares
 app.use(express.json())
@@ -14,19 +17,15 @@ app.use(cors({
     credentials: true,
 }))
 
-// get request for testing purpose
-app.get('/',(_req, res)=>{
-    try {
-        return res.status(200).json({success: true, message:"Hello World!"})
-        
-    } catch (error) {
-        console.error(error)
-        
-    }
-})
+// api routes
+app.use('/api/v1', UserRoutes)
 
 const port = process.env.PORT || 3000;
 
 // listning to the port and host
 app.listen(port, ()=>console.log(`app running on http://localhost:${port}`))
+
+
+
+
 
